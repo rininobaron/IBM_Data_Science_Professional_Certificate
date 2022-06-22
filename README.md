@@ -2,7 +2,7 @@
 
 This repository contains the solution of IBM Data Science Professional Certficate from Coursera.
 
-The following courses are in the [IBM Data Engineering Professional Certificate](https://duckduckgo.com) repository.
+The following courses are in the [IBM Data Engineering Professional Certificate](https://github.com/rininobaron/IBM_Data_Engineering_Professional_Certificate) repository.
 
 - COURSE 4 Python for Data Science, AI & Development
 - COURSE 5 Python Project for Data Science
