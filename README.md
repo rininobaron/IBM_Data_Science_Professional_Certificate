@@ -1,1 +1,3 @@
-# IBM_Data_Science_Professional_Certificate
+# IBM Data Science Professional Certificate
+
+This repository contains the solution of IBM Data Science Professional Certficate from Coursera.
