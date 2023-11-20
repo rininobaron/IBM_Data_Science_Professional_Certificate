@@ -22,11 +22,12 @@ app = dash.Dash(__name__)
 # Add a html.Div and core input text component
 # Finally, add graph component.
 app.layout = html.Div(children=[html.H1('Airline Performance Dashboard',style={'textAlign': 'center', 'color': '#503D36', 'font-size': 40}),
-                                html.Div(["Input Year", dcc.Input(),], 
-                                style={}),
+                                html.Div(["Input Year: ", dcc.Input(id='input-year', value='2010', 
+                                type='number', style={'height':'50px', 'font-size': 35}),], 
+                                style={'font-size': 40}),
                                 html.Br(),
                                 html.Br(),
-                                html.Div(),
+                                html.Div(dcc.Graph(id='line-plot')),
                                 ])
 
 # Run the app
