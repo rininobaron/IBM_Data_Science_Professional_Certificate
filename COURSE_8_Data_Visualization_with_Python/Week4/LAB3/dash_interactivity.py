@@ -14,4 +14,21 @@ airline_data =  pd.read_csv('https://cf-courses-data.s3.us.cloud-object-storage.
                             dtype={'Div1Airport': str, 'Div1TailNum': str, 
                                    'Div2Airport': str, 'Div2TailNum': str})
 
-print(airline_data.head())
+# Create a dash application layout
+app = dash.Dash(__name__)
+
+# Get the layout of the application and adjust it.
+# Create an outer division using html.Div and add title to the dashboard using html.H1 component
+# Add a html.Div and core input text component
+# Finally, add graph component.
+app.layout = html.Div(children=[html.H1('Airline Performance Dashboard',style={'textAlign': 'center', 'color': '#503D36', 'font-size': 40}),
+                                html.Div(["Input Year", dcc.Input(),], 
+                                style={}),
+                                html.Br(),
+                                html.Br(),
+                                html.Div(),
+                                ])
+
+# Run the app
+if __name__ == '__main__':
+    app.run_server()
