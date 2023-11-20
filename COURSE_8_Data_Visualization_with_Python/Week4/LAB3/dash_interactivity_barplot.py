@@ -2,6 +2,7 @@
 
 # Import required libraries
 import pandas as pd
+import plotly.express as px
 import plotly.graph_objects as go
 import dash
 from dash import dcc
@@ -33,6 +34,21 @@ app.layout = html.Div(children=[html.H1('Total number of flights to the destinat
 # add callback decorator
 @app.callback(Output(component_id='bar-plot', component_property='figure'),
               Input(component_id='input-year', component_property='value'))
+
+# Add computation to callback function and return graph
+def get_graph(entered_year):
+    # Select data based on the entered year
+    df =  airline_data[airline_data['Year']==int(entered_year)]
+    
+    # Group the destination state and reporting airline in order to count the total number of flights per combination
+    bar_data = df.groupby(['DestState','Reporting_Airline'])['Flights'].sum().reset_index()
+    
+    # 
+    fig = px.bar(x=bar_data["DestState"], 
+             y=bar_data["Flights"],
+             title='Total number of flights to the destination state split by reporting air',
+             labels={'x': 'Destination State', 'y': 'Flights'})
+    return fig
 
 # Run the app
 if __name__ == '__main__':
