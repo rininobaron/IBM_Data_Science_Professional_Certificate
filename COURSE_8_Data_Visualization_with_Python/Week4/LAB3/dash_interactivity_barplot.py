@@ -27,8 +27,12 @@ app.layout = html.Div(children=[html.H1('Total number of flights to the destinat
                                 style={'font-size': 40}),
                                 html.Br(),
                                 html.Br(),
-                                html.Div(dcc.Graph(id='bar-plot')),
+                                html.Div(dcc.Graph(id='bar-plot'), style={'font-size': 35}),
                                 ])
+
+# add callback decorator
+@app.callback(Output(component_id='bar-plot', component_property='figure'),
+              Input(component_id='input-year', component_property='value'))
 
 # Run the app
 if __name__ == '__main__':
