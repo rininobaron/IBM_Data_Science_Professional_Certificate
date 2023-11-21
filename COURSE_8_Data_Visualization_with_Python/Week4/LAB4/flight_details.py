@@ -53,44 +53,31 @@ def compute_info(airline_data, entered_year):
     # Select data
     df =  airline_data[airline_data['Year']==int(entered_year)]
     # Compute delay averages
-    target columns = ['CarrierDelay', 'WeatherDelay', 'NASDelay', 'SecurityDelay', 'LateAircraftDelay']
-    avg_car
-    for col in target columns:
+    target_columns = ['CarrierDelay', 'WeatherDelay', 'NASDelay', 'SecurityDelay', 'LateAircraftDelay']
+    avg_car = []
+    for col in target_columns:
        avg_car.append(df.groupby(['Month','Reporting_Airline'])[col].mean().reset_index())
     return avg_car
 
 # Callback decorator
-@app.callback( [
-               Output(component_id='carrier-plot', component_property='figure'),
-               ---
-               --- 
-               ---
-               ---
-               ],
-               Input(....))
+graphs = ['carrier-plot', 'weather-plot', 'nas-plot', 'security-plot', 'late-plot']
+@app.callback([Output(component_id=graph, component_property='figure') for graph in graphs],
+               Input(component_id='input-year', component_property='value'))
+
 # Computation to callback function and return graph
 def get_graph(entered_year):
     
     # Compute required information for creating graph from the data
-    avg_car, avg_weather, avg_NAS, avg_sec, avg_late = compute_info(airline_data, entered_year)
+    dataframes = compute_info(airline_data, entered_year)
+
+    # Build Line plots
+    plots = []
+    targets = [('CarrierDelay', 'carrier'), ('WeatherDelay', 'weather'), ('NASDelay', 'NAS'), ('SecurityDelay', 'Security'), ('LateAircraftDelay', 'late aircraft')]
+    for (col, name), df in zip(targets, dataframes):
+       plots.append(px.line(df, x='Month', y=col, color='Reporting_Airline', title='Average '+name+' time (minutes) by airline'))
             
-    # Line plot for carrier delay
-    carrier_fig = px.line(avg_car, x='Month', y='CarrierDelay', color='Reporting_Airline', title='Average carrier delay time (minutes) by airline')
-    # Line plot for weather delay
-    weather_fig = ------
-    # Line plot for nas delay
-    nas_fig = ------
-    # Line plot for security delay
-    sec_fig = ------
-    # Line plot for late aircraft delay
-    late_fig = ------
-            
-    return[carrier_fig, weather_fig, nas_fig, sec_fig, late_fig]
+    return plots
 
 # Run the app
 if __name__ == '__main__':
     app.run_server()
-
-# Run the app
-if __name__ == '__main__':
-       app.run_server()
