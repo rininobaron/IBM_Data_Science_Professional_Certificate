@@ -59,6 +59,38 @@ def compute_info(airline_data, entered_year):
        avg_car.append(df.groupby(['Month','Reporting_Airline'])[col].mean().reset_index())
     return avg_car
 
+# Callback decorator
+@app.callback( [
+               Output(component_id='carrier-plot', component_property='figure'),
+               ---
+               --- 
+               ---
+               ---
+               ],
+               Input(....))
+# Computation to callback function and return graph
+def get_graph(entered_year):
+    
+    # Compute required information for creating graph from the data
+    avg_car, avg_weather, avg_NAS, avg_sec, avg_late = compute_info(airline_data, entered_year)
+            
+    # Line plot for carrier delay
+    carrier_fig = px.line(avg_car, x='Month', y='CarrierDelay', color='Reporting_Airline', title='Average carrier delay time (minutes) by airline')
+    # Line plot for weather delay
+    weather_fig = ------
+    # Line plot for nas delay
+    nas_fig = ------
+    # Line plot for security delay
+    sec_fig = ------
+    # Line plot for late aircraft delay
+    late_fig = ------
+            
+    return[carrier_fig, weather_fig, nas_fig, sec_fig, late_fig]
+
+# Run the app
+if __name__ == '__main__':
+    app.run_server()
+
 # Run the app
 if __name__ == '__main__':
        app.run_server()
