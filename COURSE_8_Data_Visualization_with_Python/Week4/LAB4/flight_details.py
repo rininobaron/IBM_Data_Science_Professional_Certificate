@@ -53,12 +53,11 @@ def compute_info(airline_data, entered_year):
     # Select data
     df =  airline_data[airline_data['Year']==int(entered_year)]
     # Compute delay averages
-    avg_car = df.groupby(['Month','Reporting_Airline'])['CarrierDelay'].mean().reset_index()
-    avg_weather = df.groupby(['Month','Reporting_Airline'])['WeatherDelay'].mean().reset_index()
-    avg_NAS = df.groupby(['Month','Reporting_Airline'])['NASDelay'].mean().reset_index()
-    avg_sec = df.groupby(['Month','Reporting_Airline'])['SecurityDelay'].mean().reset_index()
-    avg_late = df.groupby(['Month','Reporting_Airline'])['LateAircraftDelay'].mean().reset_index()
-    return avg_car, avg_weather, avg_NAS, avg_sec, avg_late
+    target columns = ['CarrierDelay', 'WeatherDelay', 'NASDelay', 'SecurityDelay', 'LateAircraftDelay']
+    avg_car
+    for col in target columns:
+       avg_car.append(df.groupby(['Month','Reporting_Airline'])[col].mean().reset_index())
+    return avg_car
 
 # Run the app
 if __name__ == '__main__':
