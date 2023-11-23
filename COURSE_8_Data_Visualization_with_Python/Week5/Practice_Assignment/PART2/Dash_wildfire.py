@@ -49,20 +49,20 @@ app.layout = html.Div(children=[html.H1("Australia Wildfire Dashboard", style={"
                     html.Div([
                             html.H2('Select Year', style={'margin-right': '2em'}),
                         dcc.Dropdown(df.Year.unique(), value = 2005,id='year')
-                    ])])])#,
+                    ]),
 #Second Inner division for adding 2 inner divisions for 2 output graphs
-# #TASK 2.3: Add two empty divisions for output inside the next inner division.
-#                     html.Div([
+#TASK 2.3: Add two empty divisions for output inside the next inner division.
+                    html.Div([
                 
-#                         html.Div([ ], id='........'),
-#                         html.Div([ ], id='.........')
-#                     ], style={'.........}),
+                        html.Div([ ], id='plot1'),
+                        html.Div([ ], id='plot2')
+                    ], style={"display": "flex"})
 
-#     ])
-#     #outer division ends
+    ])
+    #outer division ends
 
-# ])
-# #layout ends
+])
+#layout ends
 # #TASK 2.4: Add the Ouput and input components inside the app.callback decorator.
 # #Place to add @app.callback Decorator
 # @app.callback([Output(component_id=.........., component_property=..........),
