@@ -27,30 +27,30 @@ df['Year'] = pd.to_datetime(df['Date']).dt.year
 #Layout Section of Dash
 
 #Task 2.1 Add the Title to the Dashboard
-app.layout = html.Div(children=[html.H1("Australia Wildfire Dashboard", style={"textAlign":"center", "color": "#503D36", "font-size": 26})])#,
+app.layout = html.Div(children=[html.H1("Australia Wildfire Dashboard", style={"textAlign":"center", "color": "#503D36", "font-size": 26}),
 
-# # TASK 2.2: Add the radio items and a dropdown right below the first inner division
-# #outer division starts
-#      html.Div([
-#                    # First inner divsion for  adding dropdown helper text for Selected Drive wheels
-#                     html.Div([
-#                             html.H2(.........)
+# TASK 2.2: Add the radio items and a dropdown right below the first inner division
+#outer division starts
+     html.Div([
+                   # First inner divsion for  adding dropdown helper text for Selected Drive wheels
+                    html.Div([
+                            html.H2('Select Region:', style={'margin-right': '2em'}),
 
-#                     #Radio items to select the region
-#                     #dcc.RadioItems(['NSW',.....], value ='...', id='...',inline=True)]),
-#                     dcc.RadioItems([{"label":"New South Wales","value": "NSW"},
-#                                     {..........},
-#                                     {..........},
-#                                     {..........},
-#                                     {..........},
-#                                     {..........},
-#                                     {"label":"...","value": ..}], value = "...", id='.....,inline=True)]),
-#                     #Dropdown to select year
-#                     html.Div([
-#                             html.H2('.........', style={...........}),
-#                         dcc.Dropdown(.....................)
-#                     ]),
-# #Second Inner division for adding 2 inner divisions for 2 output graphs
+                    #Radio items to select the region
+                    #dcc.RadioItems(['NSW',.....], value ='...', id='...',inline=True)]),
+                     dcc.RadioItems([{"label":"New South Wales","value": "NSW"},
+                                    {"label":"Northern Territory","value": "NT"},
+                                    {"label":"Queensland","value": "QL"},
+                                    {"label":"South Australia","value": "SA"},
+                                    {"label":"Tasmania","value": "TA"},
+                                    {"label":"Victoria","value": "VI"},
+                                    {"label":"Western Australia","value": "WA"}],"NSW", id='region',inline=True)]),
+                    #Dropdown to select year
+                    html.Div([
+                            html.H2('Select Year', style={'margin-right': '2em'}),
+                        dcc.Dropdown(df.Year.unique(), value = 2005,id='year')
+                    ])])])#,
+#Second Inner division for adding 2 inner divisions for 2 output graphs
 # #TASK 2.3: Add two empty divisions for output inside the next inner division.
 #                     html.Div([
                 
