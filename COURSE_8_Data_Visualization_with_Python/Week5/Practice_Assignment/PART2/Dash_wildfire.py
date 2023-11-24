@@ -67,29 +67,29 @@ app.layout = html.Div(children=[html.H1("Australia Wildfire Dashboard", style={"
 #Place to add @app.callback Decorator
 @app.callback([Output(component_id="plot1", component_property="value"),
                Output(component_id="plot2", component_property="value")],
-               [Input(component_id="'region'", component_property="children"),
+               [Input(component_id="region", component_property="children"),
                 Input(component_id="year", component_property="children")])
 
    
-# #TASK 2.5: Add the callback function.
-# #Place to define the callback function .
-# def reg_year_display(input_region,input_year):
+#TASK 2.5: Add the callback function.
+#Place to define the callback function .
+def reg_year_display(input_region,input_year):
+
+    #data
+    region_data = df[df['Region'] == input_region]
+    y_r_data = region_data[region_data['Year']==input_year]
+    #Plot one - Monthly Average Estimated Fire Area
+
+    est_data = y_r_data.groupby("Month")["Estimated_fire_area"].mean().reset_index()
+
+    fig1 = px.pie(est_data, names="Month", values="Estimated_fire_area", title="{} : Monthly Average Estimated Fire Area in year {}".format(input_region,input_year))
+
+    #Plot two - Monthly Average Count of Pixels for Presumed Vegetation Fires
+    veg_data = y_r_data.groupby("Month")["Count"].mean().reset_index()
     
-#     #data
-#    region_data = df[df['Region'] == input_region]
-#    y_r_data = region_data[region_data['Year']==input_year]
-#     #Plot one - Monthly Average Estimated Fire Area
-   
-#    est_data = .........................
- 
-#    fig1 = px.pie(.............., title="{} : Monthly Average Estimated Fire Area in year {}".format(input_region,input_year))
-   
-#      #Plot two - Monthly Average Count of Pixels for Presumed Vegetation Fires
-#    veg_data = .............................
-#    fig2 = px.bar(..............., title='{} : Average Count of Pixels for Presumed Vegetation Fires in year {}'.format(input_region,input_year))
-    
-#    return [.......,
-#             ......... ]
+    fig2 = px.bar(veg_data, x="Month", y="Count", title='{} : Average Count of Pixels for Presumed Vegetation Fires in year {}'.format(input_region,input_year))
+
+    return [dcc.Graph(figure=fig1), dcc.Graph(figure=fig2)]
 
 if __name__ == '__main__':
     app.run_server()
