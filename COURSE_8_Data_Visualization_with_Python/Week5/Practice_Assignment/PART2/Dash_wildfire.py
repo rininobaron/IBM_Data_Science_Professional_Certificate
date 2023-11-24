@@ -65,10 +65,10 @@ app.layout = html.Div(children=[html.H1("Australia Wildfire Dashboard", style={"
 #layout ends
 #TASK 2.4: Add the Ouput and input components inside the app.callback decorator.
 #Place to add @app.callback Decorator
-@app.callback([Output(component_id="plot1", component_property="value"),
-               Output(component_id="plot2", component_property="value")],
-               [Input(component_id="region", component_property="children"),
-                Input(component_id="year", component_property="children")])
+@app.callback([Output(component_id="plot1", component_property="children"),
+               Output(component_id="plot2", component_property="children")],
+               [Input(component_id="region", component_property="value"),
+                Input(component_id="year", component_property="value")])
 
    
 #TASK 2.5: Add the callback function.
