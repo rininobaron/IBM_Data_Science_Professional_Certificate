@@ -56,7 +56,7 @@ app.layout = html.Div([
 #TASK 2.4: Creating Callbacks
 # Define the callback function to update the input container based on the selected statistics
 @app.callback(
-    Output(component_id='select year', component_property='disabled'),
+    Output(component_id='select-year', component_property='disabled'),
     Input(component_id='dropdown-statistics',component_property='value'))
 
 def update_input_container(selected_statistics):
@@ -91,7 +91,7 @@ def update_output_container(year, selected_statistics):
 
 #Plot 2 Calculate the average number of vehicles sold by vehicle type       
         # use groupby to create relevant data for plotting
-        average_sales = recession_data.grupby("Vehicle_Type")["Automobile_Sales"].mean().reset_index()                           
+        average_sales = recession_data.groupby("Vehicle_Type")["Automobile_Sales"].mean().reset_index()                           
         R_chart2  = dcc.Graph(
             figure=px.pie(
                 values=average_sales["Automobile_Sales"], 
@@ -100,7 +100,7 @@ def update_output_container(year, selected_statistics):
         
 # Plot 3 Pie chart for total expenditure share by vehicle type during recessions
         # use groupby to create relevant data for plotting
-        exp_rec=recession_data.grupby("Vehicle_Type")["Advertising_Expenditure"].mean().reset_index()
+        exp_rec=recession_data.groupby("Vehicle_Type")["Advertising_Expenditure"].mean().reset_index()
         R_chart3=dcc.Graph(
             figure=px.pie(
                 values=exp_rec["Advertising_Expenditure"], 
@@ -108,17 +108,17 @@ def update_output_container(year, selected_statistics):
                 title='Total expenditure share by vehicle type'))
 
 # Plot 4 bar chart for the effect of unemployment rate on vehicle type and sales
-        une_rec=recession_data.grupby("Vehicle_Type")["Unemployment_Rate"].mean().reset_index()
+        une_rec=recession_data.groupby("Vehicle_Type")["unemployment_rate"].mean().reset_index()
         R_chart4=dcc.Graph(
             figure=px.pie(
-                values=une_rec["Unemployment_Rate"], 
+                values=une_rec["unemployment_rate"], 
                 names=une_rec["Vehicle_Type"], 
                 title='The effect of unemployment rate on vehicle type and sales'))
 
 
         return [
-            html.Div(className='chart-item', children=[html.Div(children=R_chart1),html.Div(children=R_chart2)],style={'display': 'flex'}),
-            html.Div(className='chart-item', children=[html.Div(children=R_chart3),html.Div(R_chart4)],style={'display': 'flex'})
+            html.Div(className='chart-item', children=[html.Div(children=R_chart1),html.Div(children=R_chart2)]),
+            html.Div(className='chart-item', children=[html.Div(children=R_chart3),html.Div(children=R_chart4)])
             ]
 
 # # TASK 2.6: Create and display graphs for Yearly Report Statistics
